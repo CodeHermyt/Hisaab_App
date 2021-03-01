@@ -9,22 +9,24 @@ class MainScreen extends StatelessWidget {
         title: Text("Hisaab"),
       ),
       body: SafeArea(
-        child: Column(
-          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-              height: 100,
-              width: double.infinity,
-              child: Card(
-                child: Center(
-                  child: Text(
-                    "Chart",
+        child: SingleChildScrollView(
+          child: Column(
+            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                height: 100,
+                width: double.infinity,
+                child: Card(
+                  child: Center(
+                    child: Text(
+                      "Chart",
+                    ),
                   ),
                 ),
               ),
-            ),
-            UserTransactions(),
-          ],
+              UserTransactions(),
+            ],
+          ),
         ),
       ),
     );
