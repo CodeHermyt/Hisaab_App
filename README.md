@@ -1,6 +1,6 @@
 # hisaab
 
-A new Flutter project.
+This is a mobile application, developed using flutter, to keep track of daily expenses and manage them. 
 
 ## Getting Started
 
