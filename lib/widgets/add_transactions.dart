@@ -9,7 +9,7 @@ class AddTransaction extends StatelessWidget {
 
   final amountController = TextEditingController();
 
-  void submitData() {
+  void submitData(BuildContext context) {
     final titleText = titleController.text;
     final amountText = double.parse(amountController.text);
 
@@ -17,6 +17,8 @@ class AddTransaction extends StatelessWidget {
       return;
     }
     addTx(titleText, amountText);
+
+    Navigator.pop(context);
   }
 
   @override
@@ -32,7 +34,7 @@ class AddTransaction extends StatelessWidget {
               decoration: InputDecoration(
                   labelText: "Title",
                   labelStyle: TextStyle(color: Colors.purple)),
-              onSubmitted: (_) => submitData(),
+              onSubmitted: (_) => submitData(context),
             ),
             TextField(
               controller: amountController,
@@ -42,10 +44,10 @@ class AddTransaction extends StatelessWidget {
                   color: Colors.purple,
                 ),
               ),
-              onSubmitted: (_) => submitData(),
+              onSubmitted: (_) => submitData(context),
             ),
             TextButton(
-                onPressed: submitData,
+                onPressed: () => submitData(context),
                 child: Text(
                   "Add Transaction",
                   style: TextStyle(
