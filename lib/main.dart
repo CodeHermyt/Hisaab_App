@@ -11,7 +11,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Hisaab",
       theme: ThemeData(
+        fontFamily: 'Quicksand',
         primarySwatch: Colors.deepPurple,
+        appBarTheme: AppBarTheme(
+          textTheme: ThemeData.light().textTheme.copyWith(
+                  title: TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              )),
+        ),
         // accentColor: Colors.purpleAccent,
       ),
       debugShowCheckedModeBanner: false,

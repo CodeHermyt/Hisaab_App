@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hisaab/model/transaction.dart';
 import 'package:hisaab/widgets/add_transactions.dart';
+import 'package:hisaab/widgets/chart.dart';
 import 'package:hisaab/widgets/transaction_list.dart';
 
 class MainScreen extends StatefulWidget {
@@ -20,6 +21,12 @@ class _MainScreenState extends State<MainScreen> {
     //     id: "t3", title: "Groceries", expense: 190, date: DateTime.now()),
     // Transaction(id: "t4", title: "Shoes", expense: 150, date: DateTime.now()),
   ];
+
+  List<Transaction> get _recentTransaction {
+    return _transactions.where((tx) {
+      return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
 
   void _addTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
@@ -63,16 +70,8 @@ class _MainScreenState extends State<MainScreen> {
           child: Column(
             //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                height: 100,
-                width: double.infinity,
-                child: Card(
-                  child: Center(
-                    child: Text(
-                      "Chart",
-                    ),
-                  ),
-                ),
+              Chart(
+                recentTransactions: _recentTransaction,
               ),
               TransactionList(transactions: _transactions),
               FloatingActionButton(
