@@ -42,11 +42,22 @@ class Chart extends StatelessWidget {
   Widget build(BuildContext context) {
     print(groupedTransaction);
     return Card(
-        child: Row(
-      children: groupedTransaction.map((data) {
-        return ChartBar(data["day"], data["amount"],
-            (data["amount"] as double) / totalExpense);
-      }).toList(),
-    ));
+      margin: EdgeInsets.all(5),
+      elevation: 6,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: groupedTransaction.map(
+          (data) {
+            return Expanded(
+              child: ChartBar(
+                data["day"],
+                data["amount"],
+                (data["amount"] as double) / totalExpense,
+              ),
+            );
+          },
+        ).toList(),
+      ),
+    );
   }
 }
