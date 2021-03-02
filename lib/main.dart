@@ -10,6 +10,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Hisaab",
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+        // accentColor: Colors.purpleAccent,
+      ),
       debugShowCheckedModeBanner: false,
       home: MainScreen(),
     );
