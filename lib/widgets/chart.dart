@@ -40,13 +40,13 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(groupedTransaction);
+    // print(groupedTransaction.reversed);
     return Card(
-      margin: EdgeInsets.all(5),
+      margin: EdgeInsets.all(3),
       elevation: 6,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: groupedTransaction.map(
+        children: groupedTransaction.reversed.map(
           (data) {
             return Expanded(
               child: ChartBar(
