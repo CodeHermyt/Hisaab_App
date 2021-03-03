@@ -17,10 +17,19 @@ class _MainScreenState extends State<MainScreen> {
         expense: 200,
         date: DateTime.now()),
     Transaction(id: "t2", title: "Milk", expense: 25, date: DateTime.now()),
-    // Transaction(
-    //     id: "t3", title: "Groceries", expense: 190, date: DateTime.now()),
-    // Transaction(id: "t4", title: "Shoes", expense: 150, date: DateTime.now()),
+    Transaction(
+        id: "t3", title: "Groceries", expense: 190, date: DateTime.now()),
+    Transaction(id: "t4", title: "Shoes", expense: 150, date: DateTime.now()),
+    Transaction(id: "t4", title: "Shoes", expense: 150, date: DateTime.now()),
+    Transaction(id: "t4", title: "Shoes", expense: 150, date: DateTime.now()),
+    Transaction(id: "t4", title: "Shoes", expense: 150, date: DateTime.now()),
+    Transaction(id: "t4", title: "Shoes", expense: 150, date: DateTime.now()),
   ];
+  void _deleteTransaction(String id) {
+    setState(() {
+      _transactions.removeWhere((tx) => tx.id == id);
+    });
+  }
 
   List<Transaction> get _recentTransaction {
     return _transactions.where((tx) {
@@ -28,12 +37,12 @@ class _MainScreenState extends State<MainScreen> {
     }).toList();
   }
 
-  void _addTransaction(String txTitle, double txAmount) {
+  void _addTransaction(String txTitle, double txAmount, DateTime pickedDate) {
     final newTx = Transaction(
       id: DateTime.now().toString(),
       title: txTitle,
       expense: txAmount,
-      date: DateTime.now(),
+      date: pickedDate,
     );
 
     setState(() {
@@ -53,27 +62,41 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final AppBar appBar = AppBar(
+      title: Text("Hisaab"),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () {
+            _startAddNewTransaction(context);
+          },
+        )
+      ],
+    );
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Hisaab"),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              _startAddNewTransaction(context);
-            },
-          )
-        ],
-      ),
+      appBar: appBar,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Chart(
-                recentTransactions: _recentTransaction,
+              Container(
+                height: (MediaQuery.of(context).size.height -
+                        appBar.preferredSize.height -
+                        MediaQuery.of(context).padding.top) *
+                    0.2,
+                child: Chart(
+                  recentTransactions: _recentTransaction,
+                ),
               ),
-              TransactionList(transactions: _transactions),
+              Container(
+                height: (MediaQuery.of(context).size.height -
+                        appBar.preferredSize.height -
+                        MediaQuery.of(context).padding.top) *
+                    0.72,
+                child: TransactionList(
+                    transactions: _transactions, delFun: _deleteTransaction),
+              ),
               FloatingActionButton(
                 onPressed: () {
                   _startAddNewTransaction(context);

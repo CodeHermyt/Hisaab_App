@@ -33,7 +33,7 @@ class Chart extends StatelessWidget {
   double get totalExpense {
     double sum = 0.0;
     for (int i = 0; i < groupedTransaction.length; i++) {
-      sum += groupedTransaction[i]["amount"];
+      sum += (groupedTransaction[i]["amount"] as double);
     }
     return sum;
   }
@@ -50,9 +50,11 @@ class Chart extends StatelessWidget {
           (data) {
             return Expanded(
               child: ChartBar(
-                data["day"],
-                data["amount"],
-                (data["amount"] as double) / totalExpense,
+                data["day"].toString(),
+                data["amount"] as double,
+                totalExpense == 0
+                    ? 0
+                    : (data["amount"] as double) / totalExpense,
               ),
             );
           },

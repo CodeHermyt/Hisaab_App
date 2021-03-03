@@ -3,11 +3,14 @@ import 'package:hisaab/model/transaction.dart';
 import 'package:intl/intl.dart';
 
 class TransactionList extends StatelessWidget {
+  final List<Transaction> transactions;
+
+  final Function delFun;
+
   const TransactionList({
     @required this.transactions,
+    @required this.delFun,
   });
-
-  final List<Transaction> transactions;
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +55,20 @@ class TransactionList extends StatelessWidget {
                       transactions[index].title,
                       style: Theme.of(context).textTheme.title,
                     ),
-                    subtitle: Text(DateFormat.yMMMd()
-                        .format(transactions[index].date)
-                        .toString()),
+                    subtitle: Text(
+                      DateFormat.yMMMd()
+                          .format(transactions[index].date)
+                          .toString(),
+                    ),
+                    trailing: IconButton(
+                      icon: Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      ),
+                      onPressed: () {
+                        delFun(transactions[index].id);
+                      },
+                    ),
                   ),
                 );
               }),
